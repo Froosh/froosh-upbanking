@@ -35,7 +35,7 @@ Process {
 
   foreach ($Account in $Accounts) {
     $TransactionURI = [System.UriBuilder] $Account.relationships.transactions.links.related
-    $TransactionURI.Query = ('filter[since]={0:yyyy-MM-ddTHH:mm:ssK}' -f $FilterSince) -replace '\+', '%2B'
+    $TransactionURI.Query = ('filter[since]={0:o}' -f $FilterSince) -replace '\+', '%2B'
 
     Write-Verbose -Message ('Request: {0}' -f $TransactionURI.Uri)
     $Transactions += ./Invoke-UpAPI.ps1 -PersonalAccessToken $PersonalAccessToken -Uri $TransactionURI.Uri
